@@ -28,7 +28,7 @@ class ContextAwareContainer implements ContextAwareContainerInterface, Initializ
     {
         $this->container = $container;
         $this->services = [];
-        $this->arguments = [];
+        $this->arguments = [];// pobrany w jakiś sposób kontekst
 
         $this->initialized = false;
     }
@@ -82,7 +82,7 @@ class ContextAwareContainer implements ContextAwareContainerInterface, Initializ
 
         foreach ($arguments as $argContext => $argServiceId) {
             if ($argContext == $context) {
-                $this->arguments[$serviceId][$argContext][] = $argServiceId;
+                $this->arguments[$serviceId][$argContext] = $argServiceId;
             }
         }
     }

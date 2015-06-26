@@ -24,8 +24,8 @@ services:
         class: AppBundle\Processor\ProcessorABDependant
         properties:
             dynamic_arguments:
-                a: processor
-                b: processor
+                a: [processor]
+                b: [processor]
         tags:
             - { name: context.sensitive, context: a, alias: processor.dependant }
             - { name: context.sensitive, context: b, alias: processor.dependant }
