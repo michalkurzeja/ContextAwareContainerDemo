@@ -3,6 +3,7 @@
 namespace AppBundle\ContextAwareContainer\Interfaces;
 
 use AppBundle\ContextAwareContainer\Exception\AlreadyInitializedException;
+use AppBundle\ContextAwareContainer\Exception\DynamicArgumentsMissingException;
 use AppBundle\ContextAwareContainer\Exception\ServiceNotFoundInContextException;
 use AppBundle\ContextAwareContainer\Exception\UndefinedContextException;
 
@@ -14,6 +15,7 @@ interface ContextAwareContainerInterface
      * @return mixed
      * @throws UndefinedContextException
      * @throws ServiceNotFoundInContextException
+     * @throws DynamicArgumentsMissingException
      */
     public function get($context, $alias);
 

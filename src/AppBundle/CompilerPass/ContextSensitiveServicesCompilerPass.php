@@ -30,10 +30,8 @@ class ContextSensitiveServicesCompilerPass implements CompilerPassInterface
                     [$attributes['context'], $attributes['alias'], $serviceId, $arguments]
                 );
             }
-
-
-
-
         }
+
+        $definition->addMethodCall('initialize');
     }
 }

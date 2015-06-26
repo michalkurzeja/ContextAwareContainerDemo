@@ -4,6 +4,7 @@ namespace AppBundle\ContextAwareContainer;
 
 use AppBundle\ContextAwareContainer\Exception\AlreadyInitializedException;
 use AppBundle\ContextAwareContainer\Exception\AlreadyRegisteredException;
+use AppBundle\ContextAwareContainer\Exception\DynamicArgumentsMissingException;
 use AppBundle\ContextAwareContainer\Exception\ServiceNotFoundInContextException;
 use AppBundle\ContextAwareContainer\Exception\UndefinedContextException;
 use AppBundle\ContextAwareContainer\Interfaces\ContextAwareContainerInterface;
@@ -39,7 +40,7 @@ class ContextAwareContainer implements ContextAwareContainerInterface, Initializ
 
         if ($service instanceof DynamicArgumentsInterface) {
             if (!isset($this->arguments[$serviceId][$context])) {
-                throw new \Exception("NO DYNAMIC ARGUMENTS");
+                throw new DynamicArgumentsMissingException($alias, $context);
             }
 
             $arguments = [];
@@ -88,6 +89,10 @@ class ContextAwareContainer implements ContextAwareContainerInterface, Initializ
 
     public function initialize()
     {
+        if ($this->isInitialized()) {
+            throw new AlreadyInitializedException;
+        }
+
         $this->initialized = true;
     }
 
