@@ -1,0 +1,31 @@
+services:
+    app.container.context_aware:
+        class: AppBundle\ContextAwareContainer\ContextAwareContainer
+        arguments:
+            - @service_container
+
+    app.context_sensitive.a.processor:
+        class: AppBundle\Processor\ProcessorA
+        tags:
+            - { name: context.sensitive, context: a, alias: processor }
+
+    app.context_sensitive.b.processor:
+        class: AppBundle\Processor\ProcessorB
+        tags:
+            - { name: context.sensitive, context: b, alias: processor }
+
+    app.context_sensitive.ab.processor.universal:
+        class: AppBundle\Processor\ProcessorAB
+        tags:
+            - { name: context.sensitive, context: a, alias: processor.universal }
+            - { name: context.sensitive, context: b, alias: processor.universal }
+
+    app.context_sensitive.ab.processor.dependant:
+        class: AppBundle\Processor\ProcessorABDependant
+        properties:
+            dynamic_arguments:
+                a: processor
+                b: processor
+        tags:
+            - { name: context.sensitive, context: a, alias: processor.dependant }
+            - { name: context.sensitive, context: b, alias: processor.dependant }
